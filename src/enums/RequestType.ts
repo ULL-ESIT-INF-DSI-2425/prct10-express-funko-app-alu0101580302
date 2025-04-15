@@ -5,5 +5,7 @@ import { Funko } from "../classes/Funko.js"
  */
 export type RequestType = {
     type: 'add' | 'update' | 'remove' | 'read' | 'list',
+    user: string,
     funkos?: Funko[]
+    args?: any
 }

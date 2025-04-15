@@ -2,6 +2,10 @@ import chalk from 'chalk';
 import net, { createConnection } from 'net';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import { Funko } from './classes/Funko.js';
+import { FunkoTypes } from './enums/FunkoTypes.js';
+import { Genre } from './enums/Genre.js';
+import { RequestType } from './enums/RequestType.js';
 
 const client: any = net.connect({port: 60300});
 
@@ -64,7 +68,9 @@ yargs(hideBin(process.argv))
             demandOption: true
         }
     }, (argv) => {
-        client.write(JSON.stringify({ command: 'add', args: argv }));
+        const funko: Funko = new Funko(argv.id, argv.name, argv.description, argv.type as FunkoTypes, argv.genre as Genre, argv.franchise, argv.number, argv.exclusive, argv.properties, argv.price);
+        const request: RequestType = { type: 'add', user: argv.user, funkos: [funko] };
+        client.write(JSON.stringify(request));
     })
     .help()
     .argv;
@@ -128,7 +134,8 @@ yargs(hideBin(process.argv))
             demandOption: false
         }
     }, (argv) => {
-        client.write(JSON.stringify({ command: 'add', args: argv }));
+        const request: RequestType = { type: 'update', user: argv.user, args: argv };
+        client.write(JSON.stringify(request));
     })
     .help()
     .argv;
@@ -147,7 +154,8 @@ yargs(hideBin(process.argv))
             demandOption: true
         }
     }, (argv) => {
-        client.write(JSON.stringify({ command: 'remove', args: argv }));
+        const request: RequestType = { type: 'remove', user: argv.user, args: argv };
+        client.write(JSON.stringify(request));
     })
     .help()
     .argv;
@@ -161,7 +169,8 @@ yargs(hideBin(process.argv))
             demandOption: true
         }
     }, (argv) => {
-        client.write(JSON.stringify({ command: 'list', args: argv }));
+        const request: RequestType = { type: 'list', user: argv.user};
+        client.write(JSON.stringify(request));
     })
     .help()
     .argv;
@@ -180,7 +189,8 @@ yargs(hideBin(process.argv))
             demandOption: true
         }
     }, (argv) => {
-        client.write(JSON.stringify({ command: 'read', args: argv }));
+        const request: RequestType = { type: 'read', user: argv.user, args: argv };
+        client.write(JSON.stringify(request));
     })
     .help()
     .argv;
@@ -196,7 +206,7 @@ client.on('end', () => {
 
   if (message.type === 'error') {
     console.log(chalk.red(message.message));
-  } else if (message.type === 'success') {
+  } else {
     console.log(chalk.green(message.message));
   }
 
