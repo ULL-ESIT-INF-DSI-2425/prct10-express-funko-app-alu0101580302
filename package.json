@@ -22,6 +22,8 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.24.0",
+    "@types/express": "^5.0.1",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^22.13.11",
     "@types/request": "^2.48.12",
     "@types/yargs": "^17.0.33",
@@ -38,6 +40,8 @@
   },
   "dependencies": {
     "chalk": "^5.4.1",
+    "express": "^5.1.0",
+    "lodash": "^4.17.21",
     "request": "^2.88.2",
     "yargs": "^17.7.2"
   }
