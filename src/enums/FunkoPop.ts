@@ -7,7 +7,7 @@ export type FunkoPop = {
     description: string;
     type: FunkoTypes;
     genre: Genre;
-    franchise: number;
+    franchise: string;
     number: number;
     exclusive: boolean;
     properties: string;

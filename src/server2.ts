@@ -119,9 +119,11 @@ export const openFile = (user: string) => {
                     let funkos = [];
             
                     if (!err && data.trim()) {
+                        console.log('a')
                         try {
                             funkos = JSON.parse(data);
                             if (!Array.isArray(funkos)) funkos = [];
+                            
                             resolve(funkos);
                         } catch (parseError) {
                             error = { success: false, message: 'Error al leer el JSON.' }
@@ -144,6 +146,7 @@ export const addFunko = (user: string, funko: FunkoPop) => {
                     reject({success: false, message: `Ya existe un Funko con el ID ${funko.id} en la colección de ${user}.`});
                     return;
                 }
+                
                         
                 funkos.push(funko);
                         
