@@ -1,14 +1,3 @@
 [
-  {
-    "id": 1,
-    "name": "Sonic",
-    "description": "Figura",
-    "type": "Pop!",
-    "genre": "Videojuegos",
-    "franchise": "Sonic",
-    "number": 1,
-    "exclusive": false,
-    "properties": "",
-    "price": 10
-  }
+  
 ]
